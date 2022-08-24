@@ -1,3 +1,4 @@
+use std::fs;
 use std::io::{Write, BufWriter};
 
 use alpm::{Alpm, Package, PackageFrom, PackageReason};
@@ -5,8 +6,11 @@ use anyhow::*;
 use chrono::{DateTime, Local, NaiveDateTime, TimeZone};
 use serde::Serialize;
 
+mod ini;
+
 fn main() -> Result<()> {
     let alpm = Alpm::new2("/", "/var/lib/pacman")?;
+
     let db = alpm.localdb();
     let pkgs = db.pkgs();
 
